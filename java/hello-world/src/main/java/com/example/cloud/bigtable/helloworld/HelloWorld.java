@@ -81,7 +81,17 @@ public class HelloWorld {
         // Put a single row into the table. We could also pass a list of Puts to write a batch.
         Put put = new Put(Bytes.toBytes(rowKey));
         put.addColumn(COLUMN_FAMILY_NAME, COLUMN_NAME, Bytes.toBytes(GREETINGS[i]));
+        System.out.println("put #"+ i + " starting");
         table.put(put);
+        System.out.println("put #"+ i + " done");
+        System.out.println("Sleeping...");
+        try {
+          Thread.sleep(5 * 60 * 1000);
+        } catch (Exception e) {
+          System.out.println(e);
+          return;
+        }
+        System.out.println("woke up!");
       }
 
       // Get the first greeting by row key
